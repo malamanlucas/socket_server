@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="Server.cpp" />
+    <ClCompile Include="teste.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include.h" />

@@ -46,6 +46,30 @@ void Server::init() {
 	return;
 }
 
+void Server::handleMessage(char* msg) {
+	cout << "MessageReceived: " << msg << endl;
+	if (strlen(msg) <= 0) {
+		return;
+	}
+
+	if (msg[0] == '/') { // is command
+
+		for (int i = 0; i < master.fd_count; i++)
+		{
+			SOCKET outSock = master.fd_array[i];
+			ostringstream commandBroadCast;
+			
+			msg[0] = '.';
+			istringstream iss(msg);
+			string word;
+			while (iss >> word) {
+				commandBroadCast << word <<  " ";
+			}
+			send(outSock, commandBroadCast.str().c_str(), commandBroadCast.str().size() + 1, 0);
+		}
+	}
+}
+
 void Server::listenClients() {
 	while (running)
 	{
@@ -90,7 +114,7 @@ void Server::listenClients() {
 					qtClients--;
 				}
 				else {
-					cout << "MessageRecvieed: " << buf << endl;
+					this->handleMessage(buf);
 				}
 			}
 		}

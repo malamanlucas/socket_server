@@ -5,4 +5,5 @@ class Server {
 public: 
 	void init();
 	void listenClients();
+	void handleMessage(char* msg);
 };

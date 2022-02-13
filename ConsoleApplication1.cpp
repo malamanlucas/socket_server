@@ -8,7 +8,6 @@ Server server;
 
 int main()
 {
-
 	thread th1([]() {
 		server.init();
 		server.listenClients();
@@ -26,7 +25,7 @@ int main()
 				{
 					SOCKET outSock = master.fd_array[i];
 					ostringstream buffer;
-					buffer << "hello World to everyone" << endl;
+					buffer << "test broadcasting" << endl;
 					send(outSock, buffer.str().c_str(), buffer.str().size() + 1, 0);
 				}
 			}
